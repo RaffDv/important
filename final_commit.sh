@@ -1,12 +1,14 @@
 #!/bin/bash
 
 # Define o diretório base
-DIR=$(pwd)
-
+DIR='/home/raff'
+echo "$DIR"
 # Percorre todos os diretórios filhos do diretório atual
 for d in */; do
+echo "$d"
     # Entra no diretório se for um repositório Git
     if [[ -d "$DIR/$d/.git" ]]; then
+    echo "$DIR/$d"
         cd "$DIR/$d"
         # Obtém o nome do repositório Git
         REPO_NAME=$(basename `git rev-parse --show-toplevel`)
