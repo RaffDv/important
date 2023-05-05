@@ -1,21 +1,23 @@
-#!/bin/zsh
+#!/bin/bash
 
 # Define o diretório base como a home do usuário
 DIR="$HOME"
 
 # Percorre todos os diretórios e subdiretórios do diretório base
-for d in "$DIR"/**/.git/; do
-echo"$d"
+find "$DIR" -type d -name ".git" -prune | while read d; do
+    # Obtém o caminho do diretório pai
+    parent_dir="$(dirname "$d")"
+
     # Entra no diretório se for um repositório Git
-    if [[ -d "$d" ]]; then
-        cd "$d/.."
+    if [[ -d "$parent_dir" ]]; then
+        cd "$parent_dir" || continue
         
         # Obtém o nome do repositório Git
-        REPO_NAME=$(basename `git rev-parse --show-toplevel`)
+        REPO_NAME=$(basename "$(git rev-parse --show-toplevel)")
         
         # Faz commit nas mudanças
         git add -A
-        git commit -m "[final turn] automatic commit"
+        git commit -m "[automatic] automatic commit"
         
         # Faz push para o repositório remoto
         git push
