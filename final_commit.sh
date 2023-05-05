@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Define o diretório base como a home do usuário
 DIR="$HOME"
